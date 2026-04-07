@@ -84,7 +84,9 @@ export function Section3Lifestyle() {
           max={10}
           step={1}
           value={[v.sleepQuality]}
-          onValueChange={([n]) => setValue("lifestyle.sleepQuality", n)}
+          onValueChange={(val) =>
+            setValue("lifestyle.sleepQuality", Array.isArray(val) ? val[0] : val)
+          }
           className="mt-2"
         />
       </div>
@@ -103,7 +105,9 @@ export function Section3Lifestyle() {
           max={10}
           step={1}
           value={[v.stressLevel]}
-          onValueChange={([n]) => setValue("lifestyle.stressLevel", n)}
+          onValueChange={(val) =>
+            setValue("lifestyle.stressLevel", Array.isArray(val) ? val[0] : val)
+          }
           className="mt-2"
         />
       </div>
