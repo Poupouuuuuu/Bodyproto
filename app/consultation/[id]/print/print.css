@@ -1,0 +1,7 @@
+@page { size: A4; margin: 16mm 14mm; }
+.pdf-root { background: white; color: #0f172a; font-size: 11pt; }
+.pdf-header { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #047857; padding-bottom: 12px; margin-bottom: 20px; }
+.pdf-brand { font-size: 16pt; font-weight: 700; }
+.pdf-brand-sub { font-size: 9pt; color: #64748b; }
+.pdf-footer { margin-top: 24px; padding-top: 8px; border-top: 1px solid #e2e8f0; font-size: 8pt; color: #64748b; text-align: center; }
+[id^="supp-"] { break-inside: avoid; }
