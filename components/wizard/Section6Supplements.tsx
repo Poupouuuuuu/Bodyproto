@@ -10,13 +10,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 export function Section6Supplements() {
   const { register, setValue, watch } = useFormContext<ClientProfile>();
   const budget = watch("supplements.budgetTier");
+
+  function markNothing() {
+    setValue("supplements.current", "Aucun", { shouldValidate: true });
+    setValue("supplements.pastBadExperiences", "Aucune", { shouldValidate: true });
+  }
+
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Compléments actuels et budget</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Compléments actuels et budget</h2>
+        <Button type="button" variant="secondary" size="sm" onClick={markNothing}>
+          Rien à signaler
+        </Button>
+      </div>
       <div>
         <Label>Compléments déjà pris (noms, doses)</Label>
         <Textarea {...register("supplements.current")} />
