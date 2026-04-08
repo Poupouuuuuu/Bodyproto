@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -19,7 +18,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="border-b bg-white">
           <div className="mx-auto flex max-w-6xl items-center gap-4 px-6 py-4">
             <Link href="/" className="flex items-center gap-3">
-              <Image src="/logo.png" alt="BodyStart Nutrition" width={40} height={40} className="h-10 w-auto" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="BodyStart Nutrition" className="h-10 w-auto" />
               <span className="text-lg font-semibold tracking-tight">BodyStart Nutrition</span>
             </Link>
             <nav className="ml-auto flex gap-2 text-sm">

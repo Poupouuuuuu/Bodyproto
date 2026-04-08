@@ -9,7 +9,7 @@ import type { ClientProfile } from "@/lib/schemas/clientProfile";
 export async function generateProtocol(profile: ClientProfile): Promise<Protocol> {
   const msg = await anthropic.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 4096,
+    max_tokens: 8192,
     system: loadSystemPrompt(),
     tools: [protocolTool],
     tool_choice: { type: "tool", name: PROTOCOL_TOOL_NAME },
@@ -35,7 +35,7 @@ export async function refineProtocol(
 ): Promise<{ adjustedProtocol: Protocol; analysisNarrative: string }> {
   const msg = await anthropic.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 4096,
+    max_tokens: 8192,
     system: loadSystemPrompt(),
     tools: [protocolTool],
     tool_choice: { type: "tool", name: PROTOCOL_TOOL_NAME },

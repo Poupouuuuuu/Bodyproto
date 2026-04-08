@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { getConsultation } from "@/lib/db/queries";
 import { ProtocolView } from "@/components/protocol/ProtocolView";
 import { env } from "@/lib/env";
@@ -16,7 +15,8 @@ export default async function PrintPage({
   return (
     <div className="pdf-root">
       <header className="pdf-header">
-        <Image src="/logo.png" alt="BodyStart" width={56} height={56} className="h-14 w-auto" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.png" alt="BodyStart" className="h-14 w-auto" />
         <div>
           <div className="pdf-brand">BodyStart Nutrition</div>
           <div className="pdf-brand-sub">
