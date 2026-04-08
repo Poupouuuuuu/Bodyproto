@@ -6,11 +6,30 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
+const MEALS = [
+  { key: "breakfast", label: "Petit-déjeuner", placeholder: "2 œufs, avocat, café noir..." },
+  { key: "lunch", label: "Déjeuner", placeholder: "Poulet grillé, riz, légumes vapeur..." },
+  { key: "snack", label: "Collations", placeholder: "Amandes, fruit, yaourt grec..." },
+  { key: "dinner", label: "Dîner", placeholder: "Saumon, patate douce, salade..." },
+  { key: "drinks", label: "Boissons", placeholder: "Eau (2L), 2 cafés, 1 verre de vin..." },
+] as const;
+
+type MealKey = (typeof MEALS)[number]["key"];
+
 export default function RefinePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
-  const [desc, setDesc] = useState("");
+  const [meals, setMeals] = useState<Record<MealKey, string>>({
+    breakfast: "",
+    lunch: "",
+    snack: "",
+    dinner: "",
+    drinks: "",
+  });
   const [loading, setLoading] = useState(false);
+
+  const composed = MEALS.map((m) => `${m.label}: ${meals[m.key].trim() || "—"}`).join("\n");
+  const filledChars = Object.values(meals).reduce((n, v) => n + v.trim().length, 0);
 
   async function submit() {
     setLoading(true);
@@ -18,7 +37,7 @@ export default function RefinePage({ params }: { params: Promise<{ id: string }>
       const res = await fetch("/api/refine-protocol", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ consultationId: id, dietaryDescription: desc }),
+        body: JSON.stringify({ consultationId: id, dietaryDescription: composed }),
       });
       if (!res.ok) throw new Error((await res.json()).error ?? "Erreur");
       toast.success("Protocole ajusté");
@@ -35,19 +54,21 @@ export default function RefinePage({ params }: { params: Promise<{ id: string }>
     <div className="mx-auto max-w-2xl space-y-4">
       <h1 className="text-2xl font-bold">Analyse alimentaire</h1>
       <p className="text-sm text-slate-600">
-        Décris une journée alimentaire type du client : petit-déjeuner, déjeuner,
-        collations, dîner, boissons.
+        Détaille une journée alimentaire type du client. Remplis chaque section
+        (laisse vide ou mets «&nbsp;rien&nbsp;» si le client ne consomme pas ce repas).
       </p>
-      <div>
-        <Label>Journée type</Label>
-        <Textarea
-          rows={12}
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          placeholder="Petit-déjeuner: 2 œufs, avocat, café..."
-        />
-      </div>
-      <Button onClick={submit} disabled={loading || desc.length < 20}>
+      {MEALS.map((m) => (
+        <div key={m.key}>
+          <Label>{m.label}</Label>
+          <Textarea
+            rows={3}
+            value={meals[m.key]}
+            onChange={(e) => setMeals((prev) => ({ ...prev, [m.key]: e.target.value }))}
+            placeholder={m.placeholder}
+          />
+        </div>
+      ))}
+      <Button onClick={submit} disabled={loading || filledChars < 20}>
         {loading ? "Analyse..." : "Ajuster le protocole"}
       </Button>
     </div>
