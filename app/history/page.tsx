@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +21,7 @@ type Row = {
   phone: string | null;
   consultationCount: number;
   lastConsultationAt: number;
+  lastConsultationId: string | null;
 };
 
 export default function HistoryPage() {
@@ -84,7 +86,14 @@ export default function HistoryPage() {
                 <TableCell>{r.phone ?? "—"}</TableCell>
                 <TableCell>{r.consultationCount}</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="ghost" onClick={() => del(r.id)}>
+                  {r.lastConsultationId && (
+                    <Link href={`/consultation/${r.lastConsultationId}`}>
+                      <Button variant="secondary" size="sm" className="mr-2">
+                        Voir le rapport
+                      </Button>
+                    </Link>
+                  )}
+                  <Button variant="ghost" size="sm" onClick={() => del(r.id)}>
                     Supprimer
                   </Button>
                 </TableCell>

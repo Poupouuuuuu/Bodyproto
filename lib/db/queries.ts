@@ -67,13 +67,15 @@ export type ClientListRow = {
   phone: string | null;
   consultationCount: number;
   lastConsultationAt: number | null;
+  lastConsultationId: string | null;
 };
 
 export function listClientsWithCounts(): ClientListRow[] {
   const stmt = rawSqlite.prepare<unknown[], ClientListRow>(
     `SELECT c.id as id, c.first_name as firstName, c.last_name as lastName, c.email as email, c.phone as phone,
             COUNT(co.id) as consultationCount,
-            MAX(co.created_at) as lastConsultationAt
+            MAX(co.created_at) as lastConsultationAt,
+            (SELECT id FROM consultations WHERE client_id = c.id ORDER BY created_at DESC LIMIT 1) as lastConsultationId
      FROM clients c
      LEFT JOIN consultations co ON co.client_id = c.id
      GROUP BY c.id
