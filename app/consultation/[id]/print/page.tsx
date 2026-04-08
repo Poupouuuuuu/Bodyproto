@@ -16,7 +16,7 @@ export default async function PrintPage({
   return (
     <div className="pdf-root">
       <header className="pdf-header">
-        <Image src="/logo.png" alt="BodyStart" width={56} height={56} />
+        <Image src="/logo.png" alt="BodyStart" width={56} height={56} style={{ width: "auto", height: 56 }} />
         <div>
           <div className="pdf-brand">BodyStart Nutrition</div>
           <div className="pdf-brand-sub">
