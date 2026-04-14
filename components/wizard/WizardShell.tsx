@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FormProvider, useForm, type FieldPath } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+import { BrandButton } from "@/components/ui/brand-button";
 import { STEPS } from "@/lib/wizard/steps";
 import { clientProfileSchema, type ClientProfile } from "@/lib/schemas/clientProfile";
 import { StepProgress } from "./StepProgress";
@@ -96,7 +96,7 @@ export function WizardShell() {
     <FormProvider {...form}>
       <div className="mx-auto max-w-2xl">
         <StepProgress currentIndex={step} />
-        <div className="rounded-lg border bg-white p-6 shadow-sm">
+        <div className="rounded-3xl border border-bs-primary/10 bg-bs-surface p-8 md:p-10">
           {step === 0 && <Section0Client />}
           {step === 1 && <Section1Basics />}
           {step === 2 && <Section2Goals />}
@@ -106,20 +106,21 @@ export function WizardShell() {
           {step === 6 && <Section6Supplements />}
           {step === 7 && <SectionReview />}
         </div>
-        <div className="mt-4 flex justify-between">
-          <Button
+        <div className="mt-6 flex items-center justify-between">
+          <BrandButton
             variant="ghost"
             disabled={step === 0 || submitting}
             onClick={() => setStep((s) => s - 1)}
+            size="sm"
           >
-            Précédent
-          </Button>
+            ← Précédent
+          </BrandButton>
           {step < STEPS.length - 1 ? (
-            <Button onClick={next}>Suivant →</Button>
+            <BrandButton onClick={next} size="md">Suivant →</BrandButton>
           ) : (
-            <Button onClick={submit} disabled={submitting}>
+            <BrandButton onClick={submit} disabled={submitting} size="lg">
               {submitting ? "Lancer l'analyse…" : "Générer le protocole"}
-            </Button>
+            </BrandButton>
           )}
         </div>
       </div>
