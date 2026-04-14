@@ -16,6 +16,7 @@ import { Section4Nutrition } from "./Section4Nutrition";
 import { Section5Health } from "./Section5Health";
 import { Section6Supplements } from "./Section6Supplements";
 import { SectionReview } from "./SectionReview";
+import { ScannerOverlay } from "@/components/scanner/ScannerOverlay";
 
 const sectionFieldGroups: Record<number, FieldPath<ClientProfile>[]> = {
   0: ["client"],
@@ -117,11 +118,12 @@ export function WizardShell() {
             <Button onClick={next}>Suivant →</Button>
           ) : (
             <Button onClick={submit} disabled={submitting}>
-              {submitting ? "Génération..." : "Générer le protocole"}
+              {submitting ? "Lancer l'analyse…" : "Générer le protocole"}
             </Button>
           )}
         </div>
       </div>
+      <ScannerOverlay open={submitting} />
     </FormProvider>
   );
 }
