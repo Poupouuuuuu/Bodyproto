@@ -35,3 +35,35 @@ describe("queries", () => {
     expect(list.find(c => c.id === clientId)?.consultationCount).toBe(1);
   });
 });
+
+const profileForEmail = {
+  client: { firstName: "Jean", lastName: "Martin", email: "jean@example.com", phone: null, consultationDate: "2026-04-14", consentGiven: true },
+  basics: { age: 28, sex: "male" as const, weightKg: 80, heightCm: 178, country: "France" },
+  goals: { priorities: ["muscle" as const] },
+  lifestyle: { activityLevel: "active" as const, sportTypes: [], sleepQuality: 7, sleepHours: 8, stressLevel: 3, sunExposureMinutes: 30 },
+  nutrition: { diet: "omnivore" as const, frequentFoods: [], alcoholPerWeek: 1, caffeinePerDay: 2 },
+  health: { conditions: "", medications: "", bloodwork: "", allergies: "", pregnancy: false },
+  supplements: { current: "", pastBadExperiences: "", budgetTier: "30-60" as const },
+};
+
+const protocolForEmail = {
+  summary: "test",
+  deficiencies: [{ nutrient: "Vitamin D", severity: "moderate" as const, whyAtRisk: "low sun exposure", addressedBy: ["s1"] }],
+  supplements: [{ id: "s1", emoji: "☀️", name: "Vit D3", form: "Softgel", formRationale: "r", doseValue: 2000, doseUnit: "UI" as const, timing: "morning_meal" as const, timingRationale: "r", duration: "continu", justification: "j", interactions: [], successIndicators: [], tier: 1 as const, category: "foundation" as const }],
+  dailySchedule: { morning: [], midday: [], preWorkout: [], postWorkout: [], evening: [], bedtime: [] },
+  warnings: [],
+  monitoring: { reviewAfterWeeks: 8, indicators: [], bloodTests: [] },
+};
+
+describe("markEmailSent", () => {
+  it("sets emailSentAt on the consultation", () => {
+    const { consultationId } = q.upsertClientAndConsultation(profileForEmail as any, protocolForEmail as any);
+    const before = q.getConsultation(consultationId);
+    expect(before?.emailSentAt).toBeNull();
+
+    q.markEmailSent(consultationId);
+
+    const after = q.getConsultation(consultationId);
+    expect(after?.emailSentAt).toBeInstanceOf(Date);
+  });
+});
