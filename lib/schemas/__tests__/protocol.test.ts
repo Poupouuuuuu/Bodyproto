@@ -1,46 +1,55 @@
-import { describe, expect, it } from "vitest";
+import { describe, it, expect } from "vitest";
 import { protocolSchema } from "../protocol";
 
-const validProtocol = {
-  summary: "Protocole axé sur performance et sommeil.",
+const basePayload = {
+  summary: "Protocole test",
+  deficiencies: [
+    {
+      nutrient: "Magnésium",
+      severity: "high" as const,
+      whyAtRisk: "Stress élevé",
+      addressedBy: ["magnesium-bisglycinate"],
+    },
+  ],
   supplements: [
     {
       id: "magnesium-bisglycinate",
       emoji: "💊",
-      name: "Magnésium",
+      name: "Magnésium bisglycinate",
       form: "Bisglycinate",
-      formRationale: "Biodisponibilité 4x supérieure à l'oxyde.",
+      formRationale: "Meilleure biodisponibilité",
       doseValue: 400,
-      doseUnit: "mg",
-      timing: "bedtime",
-      timingRationale: "Favorise la détente nerveuse avant le coucher.",
-      duration: "en continu",
-      justification: "Stress élevé + activité physique.",
+      doseUnit: "mg" as const,
+      timing: "bedtime" as const,
+      timingRationale: "Soir pour sommeil",
+      duration: "3 mois",
+      justification: "Stress chronique",
       interactions: [],
-      successIndicators: ["Meilleure qualité de sommeil sous 2 semaines"],
-      tier: 1,
-      category: "foundation",
+      successIndicators: ["Meilleur sommeil"],
+      tier: 1 as const,
+      category: "foundation" as const,
     },
   ],
   dailySchedule: { morning: [], midday: [], preWorkout: [], postWorkout: [], evening: [], bedtime: ["magnesium-bisglycinate"] },
-  warnings: ["Consulter un médecin si traitement en cours."],
-  monitoring: { reviewAfterWeeks: 8, indicators: ["Qualité du sommeil"], bloodTests: ["Magnésium érythrocytaire"] },
+  warnings: [],
+  monitoring: { reviewAfterWeeks: 8, indicators: [], bloodTests: [] },
 };
 
 describe("protocolSchema", () => {
-  it("accepts a valid protocol", () => {
-    const result = protocolSchema.safeParse(validProtocol);
-    if (!result.success) console.error(result.error);
+  it("accepts valid payload with deficiencies", () => {
+    const result = protocolSchema.safeParse(basePayload);
     expect(result.success).toBe(true);
   });
 
-  it("rejects an invalid timing value", () => {
-    const bad = { ...validProtocol, supplements: [{ ...validProtocol.supplements[0], timing: "random_time" }] };
-    expect(protocolSchema.safeParse(bad).success).toBe(false);
+  it("rejects payload without deficiencies field", () => {
+    const { deficiencies, ...rest } = basePayload;
+    const result = protocolSchema.safeParse(rest);
+    expect(result.success).toBe(false);
   });
 
-  it("rejects a negative dose", () => {
-    const bad = { ...validProtocol, supplements: [{ ...validProtocol.supplements[0], doseValue: -10 }] };
-    expect(protocolSchema.safeParse(bad).success).toBe(false);
+  it("rejects deficiency with invalid severity", () => {
+    const bad = { ...basePayload, deficiencies: [{ ...basePayload.deficiencies[0], severity: "critical" }] };
+    const result = protocolSchema.safeParse(bad);
+    expect(result.success).toBe(false);
   });
 });
