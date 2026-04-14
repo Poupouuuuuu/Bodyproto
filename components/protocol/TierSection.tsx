@@ -17,7 +17,7 @@ export function TierSection({ tier, supplements }: { tier: TierNum; supplements:
       </div>
       <div className="grid gap-4">
         {supplements.map((s) => (
-          <SupplementCard key={s.id} s={s} />
+          <SupplementCard key={s.id} supplement={s} />
         ))}
       </div>
     </section>

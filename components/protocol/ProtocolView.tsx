@@ -31,7 +31,7 @@ export function ProtocolView({
         {[...protocol.supplements]
           .sort((a, b) => a.tier - b.tier)
           .map((s) => (
-            <SupplementCard key={s.id} s={s} />
+            <SupplementCard key={s.id} supplement={s} />
           ))}
       </section>
       <section>
