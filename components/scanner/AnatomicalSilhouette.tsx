@@ -1,4 +1,5 @@
 "use client";
+import { ScanParticles, type Particle } from "./ScanParticles";
 
 export type OrganId = "brain" | "thyroid" | "heart" | "liver" | "gut" | "shoulders" | "knees";
 
@@ -7,6 +8,7 @@ type SilhouetteProps = {
   scanY?: number;
   /** Organes qui ont déjà été "scannés" — pulsent et laissent des particules */
   scannedOrgans?: OrganId[];
+  particles?: Particle[];
 };
 
 // Coordonnées anatomiques approximatives (dans un viewBox 200x400)
@@ -20,7 +22,7 @@ export const ORGANS: Record<OrganId, { cx: number; cy: number; r: number; label:
   knees:     { cx: 100, cy: 310, r: 6,  label: "Genoux" },
 };
 
-export function AnatomicalSilhouette({ scanY, scannedOrgans = [] }: SilhouetteProps) {
+export function AnatomicalSilhouette({ scanY, scannedOrgans = [], particles = [] }: SilhouetteProps) {
   return (
     <svg
       viewBox="0 0 200 400"
@@ -92,6 +94,8 @@ export function AnatomicalSilhouette({ scanY, scannedOrgans = [] }: SilhouettePr
           </defs>
         </g>
       )}
+
+      <ScanParticles particles={particles} />
     </svg>
   );
 }
