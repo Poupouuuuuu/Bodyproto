@@ -52,4 +52,14 @@ describe("protocolSchema", () => {
     const result = protocolSchema.safeParse(bad);
     expect(result.success).toBe(false);
   });
+
+  it("rejects an invalid timing value on a supplement", () => {
+    const bad = { ...basePayload, supplements: [{ ...basePayload.supplements[0], timing: "random_time" }] };
+    expect(protocolSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it("rejects a negative dose value", () => {
+    const bad = { ...basePayload, supplements: [{ ...basePayload.supplements[0], doseValue: -10 }] };
+    expect(protocolSchema.safeParse(bad).success).toBe(false);
+  });
 });
