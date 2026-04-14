@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandButton } from "@/components/ui/brand-button";
 import { Sparkle, ClockCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 
@@ -17,7 +18,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <a
+        <Link
           href="/consultation/new"
           className="group rounded-4xl border border-bs-primary/10 bg-bs-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-12"
         >
@@ -33,9 +34,9 @@ export default function HomePage() {
           <BrandButton variant="primary">
             Commencer →
           </BrandButton>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/history"
           className="group rounded-4xl border border-bs-primary/10 bg-bs-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-12"
         >
@@ -51,7 +52,7 @@ export default function HomePage() {
           <BrandButton variant="secondary">
             Ouvrir →
           </BrandButton>
-        </a>
+        </Link>
       </div>
     </div>
   );

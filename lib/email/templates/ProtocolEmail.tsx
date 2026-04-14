@@ -83,7 +83,7 @@ export function ProtocolEmail({
                 Questions ? Revenez nous voir en boutique ou répondez à cet email.
               </Text>
 
-              <Text className="text-sm text-[#111827]">L'équipe BodyStart</Text>
+              <Text className="text-sm text-[#111827]">L&apos;équipe BodyStart</Text>
             </Section>
 
             <Section className="bg-[#1a2e23] px-8 py-6 text-center">

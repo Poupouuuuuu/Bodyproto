@@ -2,24 +2,27 @@
 import "@testing-library/jest-dom/vitest";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import React from "react";
 import { ScannerOverlay } from "../ScannerOverlay";
 
 // framer-motion uses browser animation APIs that are absent in jsdom.
 // Mock it so that motion.div renders as a plain div.
 vi.mock("framer-motion", () => {
-  const React = require("react");
+  const MotionEl = (prop: string) => {
+    const Component = React.forwardRef<HTMLElement, Record<string, unknown>>(
+      function MotionElement({ children, ...rest }, ref) {
+        return React.createElement(prop, { ref, ...rest }, children as React.ReactNode);
+      },
+    );
+    Component.displayName = `motion.${prop}`;
+    return Component;
+  };
   return {
     motion: new Proxy(
       {},
       {
-        get: (_target: unknown, prop: string) =>
-          React.forwardRef(
-            (
-              { children, ...rest }: Record<string, unknown>,
-              ref: React.Ref<HTMLElement>
-            ) => React.createElement(prop, { ref, ...rest }, children)
-          ),
-      }
+        get: (_target: unknown, prop: string) => MotionEl(prop),
+      },
     ),
     AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
   };

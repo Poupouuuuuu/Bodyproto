@@ -33,6 +33,7 @@ export default function HistoryPage() {
     if (res.ok) setRows(await res.json());
   }
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial fetch pattern
     load();
   }, []);
 
@@ -63,6 +64,7 @@ export default function HistoryPage() {
               onChange={(e) => setQ(e.target.value)}
               className="w-64"
             />
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- /api route, not a page */}
             <a href="/api/clients/export">
               <BrandButton variant="secondary" size="sm">Export CSV</BrandButton>
             </a>

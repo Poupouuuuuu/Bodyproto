@@ -53,7 +53,7 @@ export function SupplementCard({ supplement: s }: { supplement: Supplement }) {
           <dd className="text-bs-text">{s.timingRationale}</dd>
         </div>
         <div>
-          <dt className="mb-1 text-xs uppercase tracking-widest text-bs-muted">Ce que ça t'apporte</dt>
+          <dt className="mb-1 text-xs uppercase tracking-widest text-bs-muted">Ce que ça t&apos;apporte</dt>
           <dd className="text-bs-text">{s.justification}</dd>
         </div>
         {s.interactions.length > 0 && (

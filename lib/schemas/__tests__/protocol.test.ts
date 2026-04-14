@@ -42,7 +42,8 @@ describe("protocolSchema", () => {
   });
 
   it("rejects payload without deficiencies field", () => {
-    const { deficiencies, ...rest } = basePayload;
+    const { deficiencies: _dropped, ...rest } = basePayload;
+    void _dropped;
     const result = protocolSchema.safeParse(rest);
     expect(result.success).toBe(false);
   });

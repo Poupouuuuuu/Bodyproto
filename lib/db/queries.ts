@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db, rawSqlite } from "./client";
 import { clients, consultations } from "./schema";
 import type { ClientProfile } from "@/lib/schemas/clientProfile";
