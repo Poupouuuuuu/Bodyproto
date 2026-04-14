@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getConsultation } from "@/lib/db/queries";
 import { ProtocolView } from "@/components/protocol/ProtocolView";
 
 export const dynamic = "force-dynamic";
+
+// Public durable URL carries personal information (first name, age, goals,
+// supplement protocol). Prevent search engine indexing and shared caching.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false, nocache: true },
+};
 
 type PageProps = { params: Promise<{ id: string }> };
 

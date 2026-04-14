@@ -25,7 +25,7 @@ type State = {
 type Action =
   | { type: "tick"; scanYPct: number }
   | { type: "organ"; id: OrganId; particles: Particle[] }
-  | { type: "status"; index: number }
+  | { type: "statusNext" }
   | { type: "reducedMotion"; value: boolean };
 
 function reducer(state: State, action: Action): State {
@@ -40,8 +40,11 @@ function reducer(state: State, action: Action): State {
           : [...state.scannedOrgans, action.id],
         particles: [...state.particles, ...action.particles].slice(-40),
       };
-    case "status":
-      return { ...state, statusIndex: action.index };
+    case "statusNext":
+      return {
+        ...state,
+        statusIndex: Math.min(state.statusIndex + 1, STATUS_MESSAGES.length - 1),
+      };
     case "reducedMotion":
       return { ...state, reducedMotion: action.value };
   }
@@ -70,14 +73,12 @@ export function ScannerOverlay({ open }: { open: boolean }) {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Status text cycle
+  // Status text cycle — stable interval (reducer reads prev state)
   useEffect(() => {
     if (!open) return;
-    const id = setInterval(() => {
-      dispatch({ type: "status", index: Math.min(state.statusIndex + 1, STATUS_MESSAGES.length - 1) });
-    }, 2000);
+    const id = setInterval(() => dispatch({ type: "statusNext" }), 2000);
     return () => clearInterval(id);
-  }, [open, state.statusIndex]);
+  }, [open]);
 
   // Main scan animation (RAF)
   useEffect(() => {
