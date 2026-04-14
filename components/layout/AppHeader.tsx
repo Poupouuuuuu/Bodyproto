@@ -7,7 +7,7 @@ export function AppHeader() {
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-4">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="BodyStart Nutrition"
             width={160}
             height={40}
