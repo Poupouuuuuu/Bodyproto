@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getConsultation } from "@/lib/db/queries";
 import { ProtocolView } from "@/components/protocol/ProtocolView";
+import { FloatingClose } from "@/components/layout/FloatingClose";
 
 export const dynamic = "force-dynamic";
 
@@ -19,13 +20,18 @@ export default async function Page({ params }: PageProps) {
   if (!data) notFound();
 
   return (
-    <ProtocolView
-      consultationId={data.id}
-      profile={data.profile}
-      protocol={data.protocol}
-      dietaryAnalysis={data.dietaryAnalysis}
-      analysedAt={data.updatedAt ? data.updatedAt.getTime() / 1000 : undefined}
-      emailSentAt={data.emailSentAt}
-    />
+    <>
+      <FloatingClose />
+      <main>
+        <ProtocolView
+          consultationId={data.id}
+          profile={data.profile}
+          protocol={data.protocol}
+          dietaryAnalysis={data.dietaryAnalysis}
+          analysedAt={data.updatedAt ? data.updatedAt.getTime() / 1000 : undefined}
+          emailSentAt={data.emailSentAt}
+        />
+      </main>
+    </>
   );
 }
