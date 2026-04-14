@@ -106,17 +106,17 @@ export function WizardShell() {
           {step === 6 && <Section6Supplements />}
           {step === 7 && <SectionReview />}
         </div>
-        <div className="mt-6 flex items-center justify-between">
+        <div className="mt-6 flex items-center justify-between gap-4">
           <BrandButton
             variant="ghost"
             disabled={step === 0 || submitting}
             onClick={() => setStep((s) => s - 1)}
-            size="sm"
+            size="md"
           >
             ← Précédent
           </BrandButton>
           {step < STEPS.length - 1 ? (
-            <BrandButton onClick={next} size="md">Suivant →</BrandButton>
+            <BrandButton onClick={next} size="lg">Suivant →</BrandButton>
           ) : (
             <BrandButton onClick={submit} disabled={submitting} size="lg">
               {submitting ? "Lancer l'analyse…" : "Générer le protocole"}

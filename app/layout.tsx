@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-import { AppHeader } from "@/components/layout/AppHeader";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -20,9 +19,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable} ${jetbrains.variable}`}>
-      <body className="min-h-screen bg-bs-bg text-bs-text antialiased">
-        <AppHeader />
-        <main>{children}</main>
+      <body className="min-h-[100dvh] bg-bs-bg text-bs-text antialiased">
+        {children}
         <Toaster richColors position="top-right" />
       </body>
     </html>
