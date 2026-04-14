@@ -24,7 +24,14 @@ export default async function PrintPage({
           </div>
         </div>
       </header>
-      <ProtocolView profile={c.profile} protocol={c.protocol} />
+      <ProtocolView
+          consultationId={c.id}
+          profile={c.profile}
+          protocol={c.protocol}
+          dietaryAnalysis={c.dietaryAnalysis}
+          analysedAt={c.updatedAt ? c.updatedAt.getTime() / 1000 : undefined}
+          emailSentAt={c.emailSentAt}
+        />
       <footer className="pdf-footer">
         Document généré le {new Date().toLocaleDateString("fr-FR")} — BodyStart Nutrition
       </footer>
