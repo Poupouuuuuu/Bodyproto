@@ -21,31 +21,33 @@ const timingLabels: Record<string, string> = {
 export function RecapTable({ protocol }: { protocol: Protocol }) {
   const sorted = [...protocol.supplements].sort((a, b) => a.tier - b.tier);
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Complément</TableHead>
-          <TableHead>Forme</TableHead>
-          <TableHead>Dose</TableHead>
-          <TableHead>Moment</TableHead>
-          <TableHead>Objectif</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sorted.map((s) => (
-          <TableRow key={s.id}>
-            <TableCell>
-              {s.emoji} {s.name}
-            </TableCell>
-            <TableCell>{s.form}</TableCell>
-            <TableCell>
-              {s.doseValue} {s.doseUnit}
-            </TableCell>
-            <TableCell>{timingLabels[s.timing]}</TableCell>
-            <TableCell>{s.category}</TableCell>
+    <div className="rounded-3xl border border-bs-primary/10 overflow-hidden bg-bs-surface">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="font-display uppercase tracking-wider text-bs-muted text-xs">Complément</TableHead>
+            <TableHead className="font-display uppercase tracking-wider text-bs-muted text-xs">Forme</TableHead>
+            <TableHead className="font-display uppercase tracking-wider text-bs-muted text-xs">Dose</TableHead>
+            <TableHead className="font-display uppercase tracking-wider text-bs-muted text-xs">Moment</TableHead>
+            <TableHead className="font-display uppercase tracking-wider text-bs-muted text-xs">Objectif</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {sorted.map((s) => (
+            <TableRow key={s.id}>
+              <TableCell className="text-bs-text">
+                {s.emoji} {s.name}
+              </TableCell>
+              <TableCell className="text-bs-text">{s.form}</TableCell>
+              <TableCell className="font-mono text-bs-text">
+                {s.doseValue} {s.doseUnit}
+              </TableCell>
+              <TableCell className="text-bs-text">{timingLabels[s.timing]}</TableCell>
+              <TableCell className="text-bs-text">{s.category}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

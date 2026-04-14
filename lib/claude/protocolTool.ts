@@ -8,9 +8,24 @@ export const protocolTool: Anthropic.Tool = {
   description: "Émet le protocole de compléments structuré pour le client. Tu DOIS appeler cet outil avec les recommandations finales.",
   input_schema: {
     type: "object",
-    required: ["summary", "supplements", "dailySchedule", "warnings", "monitoring"],
+    required: ["summary", "deficiencies", "supplements", "dailySchedule", "warnings", "monitoring"],
     properties: {
       summary: { type: "string", description: "Introduction narrative 2-3 phrases, markdown autorisé." },
+      deficiencies: {
+        type: "array",
+        minItems: 1,
+        description: "Carences alimentaires ou micronutritionnelles identifiées à partir du profil. Chaque carence doit être couverte par au moins un supplément du tableau 'supplements'.",
+        items: {
+          type: "object",
+          required: ["nutrient", "severity", "whyAtRisk", "addressedBy"],
+          properties: {
+            nutrient: { type: "string", description: "Nom clair et court, ex: 'Magnésium', 'Vitamine D3', 'Oméga-3 EPA/DHA'" },
+            severity: { type: "string", enum: ["low", "moderate", "high"], description: "high = déficit probable confirmé par plusieurs signaux, moderate = plausible, low = sous-optimal non critique" },
+            whyAtRisk: { type: "string", description: "Une phrase factuelle courte (< 20 mots)" },
+            addressedBy: { type: "array", items: { type: "string" }, description: "IDs des suppléments du protocole qui couvrent cette carence" },
+          },
+        },
+      },
       supplements: {
         type: "array",
         minItems: 1,

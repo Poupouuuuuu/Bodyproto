@@ -17,6 +17,7 @@ export const consultations = sqliteTable("consultations", {
   profileJson: text("profile_json").notNull(),
   protocolJson: text("protocol_json").notNull(),
   dietaryAnalysisJson: text("dietary_analysis_json"),
+  emailSentAt: integer("email_sent_at", { mode: "timestamp" }),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
 });

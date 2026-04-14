@@ -9,6 +9,7 @@ describe("protocolTool", () => {
     const required = (protocolTool.input_schema as { required: string[] }).required;
     expect([...required].sort()).toEqual([
       "dailySchedule",
+      "deficiencies",
       "monitoring",
       "summary",
       "supplements",

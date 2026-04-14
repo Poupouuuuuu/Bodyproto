@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db, rawSqlite } from "./client";
 import { clients, consultations } from "./schema";
 import type { ClientProfile } from "@/lib/schemas/clientProfile";
@@ -46,6 +46,7 @@ export function getConsultation(id: string) {
     profile: JSON.parse(row.profileJson) as ClientProfile,
     protocol: JSON.parse(row.protocolJson) as Protocol,
     dietaryAnalysis: row.dietaryAnalysisJson ? JSON.parse(row.dietaryAnalysisJson) : null,
+    emailSentAt: row.emailSentAt,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };
@@ -86,4 +87,11 @@ export function listClientsWithCounts(): ClientListRow[] {
 
 export function deleteClient(clientId: string) {
   db.delete(clients).where(eq(clients.id, clientId)).run();
+}
+
+export function markEmailSent(consultationId: string) {
+  db.update(consultations)
+    .set({ emailSentAt: new Date() })
+    .where(eq(consultations.id, consultationId))
+    .run();
 }

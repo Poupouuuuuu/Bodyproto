@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { BrandButton } from "@/components/ui/brand-button";
 import {
   Table,
   TableBody,
@@ -33,6 +33,7 @@ export default function HistoryPage() {
     if (res.ok) setRows(await res.json());
   }
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial fetch pattern
     load();
   }, []);
 
@@ -50,64 +51,69 @@ export default function HistoryPage() {
   );
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <h1 className="text-2xl font-bold">Historique clients</h1>
-        <div className="ml-auto flex gap-2">
-          <Input
-            placeholder="Rechercher…"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            className="w-64"
-          />
-          <a href="/api/clients/export">
-            <Button variant="secondary">Export CSV</Button>
-          </a>
+    <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <h1 className="font-display text-4xl font-black uppercase tracking-tight text-bs-primary mb-6">
+            Historique clients
+          </h1>
+          <div className="ml-auto flex gap-2">
+            <Input
+              placeholder="Rechercher…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="w-64"
+            />
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- /api route, not a page */}
+            <a href="/api/clients/export">
+              <BrandButton variant="secondary" size="sm">Export CSV</BrandButton>
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="rounded-lg border bg-white">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Nom</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Téléphone</TableHead>
-              <TableHead>Consultations</TableHead>
-              <TableHead></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filtered.map((r) => (
-              <TableRow key={r.id}>
-                <TableCell>
-                  {r.firstName} {r.lastName}
-                </TableCell>
-                <TableCell>{r.email}</TableCell>
-                <TableCell>{r.phone ?? "—"}</TableCell>
-                <TableCell>{r.consultationCount}</TableCell>
-                <TableCell className="text-right">
-                  {r.lastConsultationId && (
-                    <Link href={`/consultation/${r.lastConsultationId}`}>
-                      <Button variant="secondary" size="sm" className="mr-2">
-                        Voir le rapport
-                      </Button>
-                    </Link>
-                  )}
-                  <Button variant="ghost" size="sm" onClick={() => del(r.id)}>
-                    Supprimer
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-            {filtered.length === 0 && (
+        <div className="rounded-2xl border border-bs-primary/10 bg-bs-surface">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={5} className="py-8 text-center text-sm text-slate-500">
-                  Aucun client
-                </TableCell>
+                <TableHead className="text-bs-muted">Nom</TableHead>
+                <TableHead className="text-bs-muted">Email</TableHead>
+                <TableHead className="text-bs-muted">Téléphone</TableHead>
+                <TableHead className="text-bs-muted">Consultations</TableHead>
+                <TableHead></TableHead>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {filtered.map((r) => (
+                <TableRow key={r.id}>
+                  <TableCell className="text-bs-primary font-medium">
+                    {r.firstName} {r.lastName}
+                  </TableCell>
+                  <TableCell className="text-bs-muted">{r.email}</TableCell>
+                  <TableCell className="text-bs-muted">{r.phone ?? "—"}</TableCell>
+                  <TableCell className="text-bs-muted">{r.consultationCount}</TableCell>
+                  <TableCell className="text-right">
+                    {r.lastConsultationId && (
+                      <Link href={`/consultation/${r.lastConsultationId}`}>
+                        <BrandButton variant="secondary" size="sm" className="mr-2">
+                          Voir le rapport
+                        </BrandButton>
+                      </Link>
+                    )}
+                    <BrandButton variant="ghost" size="sm" onClick={() => del(r.id)}>
+                      Supprimer
+                    </BrandButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {filtered.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="py-8 text-center text-sm text-bs-muted">
+                    Aucun client
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

@@ -1,34 +1,28 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from "next/link";
+import { Inter, Montserrat, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { AppHeader } from "@/components/layout/AppHeader";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
+});
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "BodyStart Nutrition — Supplement Advisor",
-  description: "Outil de génération de protocoles personnalisés",
+  title: "BodyStart Nutrition — Test & Protocole",
+  description: "Test personnalisé BodyStart Nutrition : carences + compléments recommandés.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className={`${inter.className} min-h-screen bg-slate-50 text-slate-900`}>
-        <header className="border-b bg-white">
-          <div className="mx-auto flex max-w-6xl items-center gap-4 px-6 py-4">
-            <Link href="/" className="flex items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="BodyStart Nutrition" className="h-10 w-auto" />
-              <span className="text-lg font-semibold tracking-tight">BodyStart Nutrition</span>
-            </Link>
-            <nav className="ml-auto flex gap-2 text-sm">
-              <Link href="/consultation/new" className="rounded-md px-3 py-2 hover:bg-slate-100">Nouvelle consultation</Link>
-              <Link href="/history" className="rounded-md px-3 py-2 hover:bg-slate-100">Historique</Link>
-            </nav>
-          </div>
-        </header>
-        <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+    <html lang="fr" className={`${inter.variable} ${montserrat.variable} ${jetbrains.variable}`}>
+      <body className="min-h-screen bg-bs-bg text-bs-text antialiased">
+        <AppHeader />
+        <main>{children}</main>
         <Toaster richColors position="top-right" />
       </body>
     </html>

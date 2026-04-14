@@ -9,6 +9,17 @@ export const categoryEnum = z.enum([
   "foundation", "performance", "recovery", "beauty", "hormonal", "digestive",
 ]);
 
+export const severityEnum = z.enum(["low", "moderate", "high"]);
+export type Severity = z.infer<typeof severityEnum>;
+
+export const deficiencySchema = z.object({
+  nutrient: z.string().min(1),
+  severity: severityEnum,
+  whyAtRisk: z.string().min(1),
+  addressedBy: z.array(z.string()),
+});
+export type Deficiency = z.infer<typeof deficiencySchema>;
+
 export const doseUnitEnum = z.enum(["mg", "g", "UI", "µg"]);
 
 export const supplementSchema = z.object({
@@ -32,6 +43,7 @@ export type Supplement = z.infer<typeof supplementSchema>;
 
 export const protocolSchema = z.object({
   summary: z.string().min(1),
+  deficiencies: z.array(deficiencySchema),
   supplements: z.array(supplementSchema).min(1),
   dailySchedule: z.object({
     morning: z.array(z.string()),

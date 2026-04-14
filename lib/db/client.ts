@@ -28,6 +28,7 @@ sqlite.exec(`
     profile_json TEXT NOT NULL,
     protocol_json TEXT NOT NULL,
     dietary_analysis_json TEXT,
+    email_sent_at INTEGER,
     created_at INTEGER NOT NULL DEFAULT (unixepoch()),
     updated_at INTEGER NOT NULL DEFAULT (unixepoch())
   );
