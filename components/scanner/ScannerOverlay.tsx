@@ -76,10 +76,11 @@ export function ScannerOverlay({ open }: { open: boolean }) {
 
   // Elapsed time counter (1s interval — minimal re-renders)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset on close
     if (!open) { setElapsedSec(0); return; }
     startRef.current = Date.now();
     const id = setInterval(() => {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- timer pattern
+       
       setElapsedSec(Math.floor((Date.now() - startRef.current) / 1000));
     }, 1000);
     return () => clearInterval(id);

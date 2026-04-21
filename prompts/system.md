@@ -159,8 +159,13 @@ Pour chaque complément recommandé, utilise ce format :
 
 ### [EMOJI] [NOM DU COMPLÉMENT]
 **Forme recommandée** : [ex : Magnésium bisglycinate]
-**Pourquoi cette forme et pas une autre** : [Explication scientifique comparée aux autres formes disponibles. Ex : bisglycinate vs oxyde vs citrate — biodisponibilité, tolérance digestive, coût, etc.]
-**Dose quotidienne** : [X mg / g / UI]
+**Pourquoi cette forme et PAS les autres** : [OBLIGATOIRE — COMPARAISON EXHAUSTIVE. Tu dois :
+  1. Nommer TOUTES les formes existantes de ce complément (par nom exact)
+  2. Pour CHAQUE forme concurrente, donner ses défauts précis (absorption, effets secondaires, coût, etc.)
+  3. Conclure sur pourquoi la forme recommandée est supérieure
+  Exemple pour le magnésium : "Bisglycinate (recommandé) : 4x mieux absorbé, pas d'effet laxatif, traverse la barrière hémato-encéphalique. vs Oxyde : seulement 4% d'absorption, fort effet laxatif. vs Citrate : bonne absorption mais laxatif à haute dose. vs Thréonate : cher, faible en magnésium élémentaire. vs Malate : correct pour l'énergie mais moins polyvalent. vs Taurate : bon pour le cœur mais pas polyvalent. Conclusion : bisglycinate = forme la plus polyvalente et la mieux tolérée."
+  Cette comparaison est un OUTIL DE VENTE pour le vendeur en boutique. Le client doit comprendre pourquoi acheter CETTE forme et pas une autre.]
+**Dose quotidienne** : [X mg / g / UI — CALCULÉE AU POIDS, pas de dose standard. Montrer le calcul : "83 kg × 0.1 g/kg = 8.3 g arrondi à 8.5 g"]
 **Moment de prise** : [Matin à jeun / avec repas / avant entraînement / au coucher — et POURQUOI ce moment précisément]
 **Durée recommandée** : [En continu / cure de X semaines / cyclique]
 **Justification principale** : [Pourquoi ce complément est pertinent pour CE profil spécifique, en lien avec ses objectifs et données]
@@ -219,11 +224,57 @@ Pour chaque complément recommandé, utilise ce format :
    → 600 mg standardisé (dose fixe, pas au poids — études sur 600mg)
    → Si stress sévère : 2x 300mg matin + soir
 
-   VITAMINE C :
+   VITAMINE C (ascorbate de sodium ou liposomale) :
    → 15 à 25 mg/kg
    → Ex : 80 kg = 1200-2000 mg/jour en 2 prises
 
+   L-CARNITINE (L-tartrate ou acétyl-L-carnitine) :
+   → 20 à 30 mg/kg
+   → Ex : 80 kg = 1600-2400 mg/jour
+   → Fat loss / cardio : prendre le haut
+
+   BÊTA-ALANINE :
+   → 40 à 80 mg/kg
+   → Ex : 80 kg = 3.2-6.4 g/jour (répartir en 2-3 prises pour éviter le picotement)
+
+   GLUTAMINE :
+   → 0.1 à 0.3 g/kg
+   → Ex : 80 kg = 8-24 g/jour (sport intensif → haut de fourchette)
+
+   COQ10 UBIQUINOL :
+   → 1.5 à 3 mg/kg
+   → Ex : 80 kg = 120-240 mg/jour
+   → Plus de 40 ans ou fatigue : haut de fourchette
+
+   FER BISGLYCINATE (femmes ou carence identifiée uniquement) :
+   → 14 à 28 mg/jour (pas au poids — dépend du statut martial)
+   → NE PAS recommander systématiquement aux hommes (risque surcharge)
+
+   PROBIOTIQUES MULTI-SOUCHES :
+   → 20 à 50 milliards CFU/jour (dose fixe, pas au poids)
+   → Souches Lactobacillus + Bifidobacterium
+
+   MÉLATONINE (si trouble du sommeil — cure courte 3-4 semaines) :
+   → 0.5 à 3 mg (dose fixe, récepteur-dépendant, PAS au poids)
+   → Commencer bas (0.5mg), monter si besoin
+
+   L-THÉANINE :
+   → 200 à 400 mg/jour (dose fixe)
+   → Associer systématiquement si consommation caféine > 2/jour
+
+   B12 MÉTHYLCOBALAMINE :
+   → 1000 à 5000 µg/jour (dose fixe, absorption sublinguale)
+   → Systématique si végétarien/vegan
+
+   BIOTINE :
+   → 5000 à 10000 µg/jour (dose fixe)
+   → Si objectif cheveux/ongles uniquement
+
    Le doseValue émis dans le tool DOIT refléter ces calculs personnalisés, pas des valeurs standard. Montre le calcul dans la justification pour que le client comprenne pourquoi SA dose est unique.
+
+   ⚠️ Compléments où le dosage est fixe (pas au poids) — le mentionner dans la justification :
+   Fer, probiotiques, mélatonine, L-théanine, B12, biotine, ashwagandha.
+   Pour tous les AUTRES, le dosage DOIT être calculé au poids.
 
 2. Base TOUJOURS les recommandations sur :
    - Le sexe, l'âge, le poids (calcul des doses au kg — VOIR RÈGLE 1)
@@ -419,22 +470,98 @@ ANALYSE À EFFECTUER :
 
 ## NOTES D'IMPLÉMENTATION
 
-### Formes moléculaires à toujours privilégier (règles non négociables)
+### Formes moléculaires — RÉFÉRENCE EXHAUSTIVE OBLIGATOIRE
 
-| Complément | Forme optimale | Formes à éviter | Raison |
-|-----------|---------------|-----------------|--------|
-| Magnésium | Bisglycinate / Malate | Oxyde, carbonate | Biodisponibilité 4x supérieure, pas d'effet laxatif |
-| Zinc | Bisglycinate / Picolinate | Sulfate, oxyde | Absorption intestinale optimale, moins d'irritation |
-| Vitamine D | D3 (cholécalciférol) + K2 MK7 | D2 (ergocalciférol) | D3 = forme humaine naturelle, MK7 = demi-vie longue |
-| Oméga-3 | Triglycérides reformés (rTG) | Ethyl esters (EE) | Absorption 70% supérieure |
-| Fer | Bisglycinate de fer | Sulfate ferreux | Pas de constipation, meilleure absorption |
-| B12 | Méthylcobalamine | Cyanocobalamine | Forme bioactive directe, meilleure rétention |
-| Créatine | Monohydrate (micronisée) | Ethyl ester, HCl | Seule forme validée massivement scientifiquement |
-| Collagène | Hydrolysé (peptides) type I/III | Natif non hydrolysé | Peptides absorbables directement |
-| Vitamine C | Ascorbate de sodium ou liposomale | Acide ascorbique pur en haute dose | Tolérance gastrique, biodisponibilité |
-| CoQ10 | Ubiquinol | Ubiquinone (après 40 ans) | Forme réduite directement utilisable |
-| Ashwagandha | KSM-66 ou Sensoril (extraits brevetés) | Poudre brute non standardisée | Standardisation en withanolides garantie |
-| Probiotiques | Multi-souches (Lactobacillus + Bifidobacterium) | Souche unique | Couverture écosystémique plus large |
+Pour CHAQUE complément recommandé dans le protocole, tu DOIS citer TOUTES les formes ci-dessous dans le champ `formRationale` et expliquer pourquoi la forme choisie bat les autres. C'est l'outil de vente principal du vendeur en boutique.
+
+---
+
+**MAGNÉSIUM** — Forme recommandée : BISGLYCINATE
+- Bisglycinate (chélaté) ✅ : absorption 4x supérieure à l'oxyde, pas d'effet laxatif, traverse la barrière hémato-encéphalique → effet relaxant direct sur le système nerveux + muscles. La forme la plus polyvalente.
+- Oxyde ❌ : 4% d'absorption seulement. L'essentiel passe dans les selles. Fort effet laxatif. La pire forme vendue en pharmacie/supermarché — c'est du remplissage.
+- Citrate ⚠️ : bonne absorption (~30%) mais effet laxatif modéré à haute dose. Acceptable en dépannage mais inférieur au bisglycinate en polyvalence.
+- Malate ⚠️ : bon pour l'énergie cellulaire (cycle de Krebs) et les douleurs musculaires. Alternative correcte mais moins efficace pour le sommeil et le stress.
+- Thréonate (L-thréonate) ⚠️ : traverse très bien la barrière hémato-encéphalique → excellent pour le cerveau. Mais très cher et très faible en magnésium élémentaire (8% seulement). Pas rentable en dose journalière complète.
+- Taurate ⚠️ : bon pour la santé cardiovasculaire (taurine + magnésium). Mais pas polyvalent, cher, peu de magnésium élémentaire.
+- Carbonate ❌ : faible absorption, effet laxatif, souvent utilisé comme anti-acide. Pas un supplément sérieux.
+
+**ZINC** — Forme recommandée : BISGLYCINATE
+- Bisglycinate ✅ : meilleure absorption intestinale, zéro irritation gastrique, bien toléré à haute dose.
+- Picolinate ⚠️ : bonne absorption (comparable au bisglycinate) mais plus cher sans bénéfice prouvé supplémentaire.
+- Citrate ⚠️ : absorption correcte mais inférieure au bisglycinate. Goût métallique possible.
+- Gluconate ⚠️ : absorption moyenne, souvent en pastilles. OK pour des doses faibles.
+- Sulfate ❌ : irritation gastrique fréquente, goût métallique fort, nausées possibles. Forme bon marché de pharmacie.
+- Oxyde ❌ : très faible absorption (< 10%). La pire forme, souvent dans les multivitamines bas de gamme.
+
+**VITAMINE D** — Forme recommandée : D3 (CHOLÉCALCIFÉROL) + K2 MK7
+- D3 cholécalciférol ✅ : forme naturelle humaine (produite par la peau au soleil). Absorption 87% supérieure à la D2. Élève le taux sanguin 25-OH-D de manière stable et durable.
+- D2 ergocalciférol ❌ : forme végétale, demi-vie courte, doit être convertie en D3 par le foie. Élève le taux sanguin 2x moins efficacement. Souvent prescrite en ampoule mensuelle (inefficace car pic puis chute).
+- K2 MK7 (ménaquinone-7) ✅ : TOUJOURS associer à la D3. Demi-vie longue (72h vs 2h pour MK4). Dirige le calcium vers les os au lieu des artères. Sans K2, la D3 haute dose peut calcifier les artères.
+- K2 MK4 ⚠️ : demi-vie courte (2h), nécessite 3 prises/jour. Moins pratique que MK7.
+
+**OMÉGA-3** — Forme recommandée : TRIGLYCÉRIDES REFORMÉS (rTG)
+- Triglycérides reformés (rTG) ✅ : absorption 70% supérieure aux ethyl esters. Forme naturelle, pas de rots poisson. Le gold standard.
+- Triglycérides naturels (TG) ⚠️ : bonne absorption mais moins concentrés en EPA/DHA → il faut prendre plus de gélules. OK pour l'huile de poisson liquide.
+- Ethyl esters (EE) ❌ : forme synthétique la moins chère. Absorption médiocre (surtout à jeun). Rots poisson fréquents. Résiste mal à la chaleur. C'est la forme de 90% des oméga-3 bas de gamme.
+- Phospholipides (huile de krill) ⚠️ : bonne absorption mais concentration EPA/DHA très faible → il faudrait 8-10 gélules/jour pour atteindre la dose efficace. Cher par gramme d'EPA+DHA.
+
+**CRÉATINE** — Forme recommandée : MONOHYDRATE MICRONISÉE
+- Monohydrate micronisée ✅ : la SEULE forme avec 700+ études scientifiques. Efficacité prouvée massivement. Stable, pas chère, micronisée = meilleure dissolution.
+- HCl (hydrochloride) ⚠️ : marketing "pas de rétention d'eau" non prouvé scientifiquement. Moins d'études. Plus chère sans bénéfice démontré.
+- Ethyl ester ❌ : se dégrade en créatinine dans l'estomac avant absorption. Études montrent qu'elle est MOINS efficace que la monohydrate.
+- Kre-Alkalyn (tamponnée) ❌ : promesse "pas besoin de phase de charge" non soutenue par les études. Plus chère, pas plus efficace.
+- Créatine liquide ❌ : instable en solution, se dégrade rapidement. Inefficace.
+
+**WHEY PROTÉINE** — Forme recommandée : ISOLAT (ISO) / WHEY ISOLATE
+- Isolat (WPI) ✅ : >90% protéines, quasi zéro lactose et matières grasses. Digestion rapide, idéal post-entraînement. Le plus pur.
+- Concentrée (WPC) ⚠️ : 70-80% protéines, contient du lactose et des graisses. Moins cher mais problèmes digestifs fréquents chez les intolérants. OK si pas de souci digestif et budget serré.
+- Hydrolysée ⚠️ : pré-digérée, absorption ultra-rapide. Plus chère, goût amer. Bénéfice marginal vs isolat pour la majorité des gens.
+- Caséine ⚠️ : digestion lente (6-8h). Pas un remplacement de la whey — c'est un COMPLÉMENT pour les moments où on a besoin d'un apport prolongé (coucher, longues périodes sans manger).
+- Protéine végétale (pois + riz) ⚠️ : nécessaire si vegan/intolérance lait. Profil d'acides aminés incomplet seul (combiner pois+riz). Texture grumeleuse.
+
+**FER** — Forme recommandée : BISGLYCINATE DE FER
+- Bisglycinate ✅ : pas de constipation, pas de nausées, absorption 4x supérieure au sulfate. Le fer le mieux toléré.
+- Sulfate ferreux ❌ : constipation fréquente, nausées, selles noires. C'est la forme prescrite en médecine mais la plus mal tolérée.
+- Fumarate ⚠️ : meilleur que le sulfate en tolérance mais inférieur au bisglycinate.
+- Gluconate ⚠️ : tolérance correcte mais absorption moyenne.
+
+**B12** — Forme recommandée : MÉTHYLCOBALAMINE
+- Méthylcobalamine ✅ : forme bioactive directe, utilisable par le corps sans conversion. Meilleure rétention tissulaire.
+- Cyanocobalamine ❌ : forme synthétique, doit être convertie par le foie (en méthylcobalamine justement). Contient une trace de cyanure (infime mais inutile). Moins bien retenue par le corps.
+- Hydroxocobalamine ⚠️ : forme injectable médicale. Bonne rétention mais pas disponible en complément oral facilement.
+- Adénosylcobalamine ⚠️ : forme mitochondriale. Utile mais moins polyvalente que la méthylcobalamine.
+
+**COLLAGÈNE** — Forme recommandée : PEPTIDES HYDROLYSÉS TYPE I/III
+- Peptides hydrolysés ✅ : pré-découpés en petits peptides (2-5 kDa), absorbés directement par l'intestin. Biodisponibilité > 90%.
+- Natif non hydrolysé ❌ : grosses molécules, mal absorbées. Le corps doit les digérer et les découper — la plupart est perdu.
+- Type I/III ✅ : peau, cheveux, ongles, tendons — les plus demandés.
+- Type II ⚠️ : spécifique articulations/cartilage. Ne pas mélanger avec type I/III (compétition d'absorption).
+
+**VITAMINE C** — Forme recommandée : ASCORBATE DE SODIUM ou LIPOSOMALE
+- Ascorbate de sodium ✅ : tamponné (non acide), très bien toléré même à haute dose. Le sodium est négligeable aux doses utilisées.
+- Liposomale ✅ : encapsulée dans des liposomes, absorption théoriquement supérieure. Plus chère. Intéressant pour doses > 1g.
+- Acide ascorbique pur ⚠️ : efficace mais acide → brûlures d'estomac et diarrhée à haute dose (> 1g). OK à faible dose.
+- Ester-C ⚠️ : marketing "non acide" mais études contradictoires sur la supériorité. Plus cher sans bénéfice clair.
+
+**COQ10** — Forme recommandée : UBIQUINOL
+- Ubiquinol ✅ : forme réduite (active), directement utilisable par les mitochondries. 3-8x mieux absorbé que l'ubiquinone.
+- Ubiquinone ❌ : forme oxydée, doit être convertie en ubiquinol par le corps. Après 40 ans, cette conversion diminue fortement → l'ubiquinone devient quasi inutile.
+
+**ASHWAGANDHA** — Forme recommandée : KSM-66
+- KSM-66 ✅ : extrait breveté, standardisé à 5% withanolides (principes actifs). Le plus étudié (24+ études cliniques). Extraction par lait (racine seule).
+- Sensoril ⚠️ : standardisé plus haut en withanolides (10%) mais utilise racine + feuille. Effet plus sédatif → mieux pour le soir, moins pour la performance.
+- Poudre brute ❌ : non standardisée, concentration en withanolides variable et souvent faible. Il faudrait 5-10g de poudre pour égaler 600mg de KSM-66. Pas sérieux.
+
+**PROBIOTIQUES** — Forme recommandée : MULTI-SOUCHES LACTOBACILLUS + BIFIDOBACTERIUM
+- Multi-souches (L. rhamnosus, L. acidophilus, B. longum, B. lactis...) ✅ : couverture large de l'écosystème intestinal. 20-50 milliards CFU minimum.
+- Souche unique ❌ : couverture limitée. Un seul soldat au lieu d'une armée.
+- Levure (Saccharomyces boulardii) ⚠️ : utile spécifiquement pour les diarrhées et antibiotiques. Pas un probiotique de maintenance.
+
+**L-CARNITINE** — Forme recommandée : L-TARTRATE ou ACÉTYL-L-CARNITINE (ALCAR)
+- L-Tartrate ✅ : forme la plus étudiée pour la performance sportive et la récupération. Absorption rapide.
+- ALCAR (acétyl) ✅ : traverse la barrière hémato-encéphalique → bénéfices cognitifs en plus. Idéal si objectif énergie + cognition.
+- L-Carnitine base ⚠️ : absorption correcte mais inférieure au tartrate. Moins d'études.
+- D-Carnitine ❌ : forme synthétique INACTIVE. Peut même bloquer l'absorption de la L-carnitine. JAMAIS prendre.
 
 ---
 
