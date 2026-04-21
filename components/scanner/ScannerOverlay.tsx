@@ -17,7 +17,7 @@ const STATUS_MESSAGES = [
 
 const SCAN_PERIOD_MS = 2400;
 const ORGAN_ORDER: OrganId[] = ["brain", "shoulders", "thyroid", "heart", "liver", "gut", "knees"];
-const ESTIMATED_SECONDS = 55;
+const ESTIMATED_SECONDS = 90;
 
 type State = {
   scannedOrgans: OrganId[];
@@ -51,9 +51,9 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-/** Progress curve calibrated for ~55s generation. Reaches 95% around 50s. */
+/** Progress curve calibrated for ~90s generation. Reaches 95% around 80s. */
 function fakeProgress(elapsedSec: number): number {
-  return Math.min(0.95, 1 - Math.exp(-elapsedSec / 18));
+  return Math.min(0.95, 1 - Math.exp(-elapsedSec / 28));
 }
 
 export function ScannerOverlay({ open }: { open: boolean }) {
@@ -93,7 +93,7 @@ export function ScannerOverlay({ open }: { open: boolean }) {
   // Status text cycle (2s interval)
   useEffect(() => {
     if (!open) return;
-    const id = setInterval(() => dispatch({ type: "statusNext" }), 6000);
+    const id = setInterval(() => dispatch({ type: "statusNext" }), 10000);
     return () => clearInterval(id);
   }, [open]);
 

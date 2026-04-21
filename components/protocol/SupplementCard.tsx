@@ -1,5 +1,6 @@
 import type { Supplement } from "@/lib/schemas/protocol";
 import { tierColor, tierShort, type TierNum } from "@/lib/tier/labels";
+import ReactMarkdown from "react-markdown";
 
 const TIMING_LABEL: Record<string, string> = {
   morning_fasted: "Matin à jeun",
@@ -10,6 +11,14 @@ const TIMING_LABEL: Record<string, string> = {
   evening: "Soir",
   bedtime: "Coucher",
 };
+
+function Prose({ children }: { children: string }) {
+  return (
+    <div className="prose prose-sm max-w-none text-bs-text prose-strong:text-bs-primary prose-p:my-1">
+      <ReactMarkdown>{children}</ReactMarkdown>
+    </div>
+  );
+}
 
 export function SupplementCard({ supplement: s }: { supplement: Supplement }) {
   const color = tierColor(s.tier as TierNum);
@@ -46,15 +55,15 @@ export function SupplementCard({ supplement: s }: { supplement: Supplement }) {
       <dl className="space-y-4 text-sm">
         <div>
           <dt className="mb-1 text-xs uppercase tracking-widest text-bs-muted">Pourquoi cette forme</dt>
-          <dd className="text-bs-text">{s.formRationale}</dd>
+          <dd><Prose>{s.formRationale}</Prose></dd>
         </div>
         <div>
           <dt className="mb-1 text-xs uppercase tracking-widest text-bs-muted">Pourquoi ce moment</dt>
-          <dd className="text-bs-text">{s.timingRationale}</dd>
+          <dd><Prose>{s.timingRationale}</Prose></dd>
         </div>
         <div>
           <dt className="mb-1 text-xs uppercase tracking-widest text-bs-muted">Ce que ça t&apos;apporte</dt>
-          <dd className="text-bs-text">{s.justification}</dd>
+          <dd><Prose>{s.justification}</Prose></dd>
         </div>
         {s.interactions.length > 0 && (
           <div>

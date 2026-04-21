@@ -349,19 +349,33 @@ Identifie 3 à 6 carences probables (alimentaires ou micronutritionnelles) à pa
 
 Règle stricte : chaque carence identifiée DOIT être couverte par au moins un supplément du protocole. Si une carence identifiée n'a pas de supplément associé, ajoute-le au protocole (minimum tier 2).
 
-7. Présente les compléments organisés par MOMENT DE LA JOURNÉE :
+7. REMPLIR LE DAILY SCHEDULE (OBLIGATOIRE — NE PAS LAISSER VIDE) :
 
-   ☀️ MATIN (à jeun ou avec petit-déjeuner)
-   [liste des compléments du matin]
-
-   🥗 MIDI / REPAS PRINCIPAL
-   [liste des compléments du midi]
-
-   🏋️ PRÉ-ENTRAÎNEMENT (si applicable)
-   [liste]
-
-   🔄 POST-ENTRAÎNEMENT (si applicable)
-   [liste]
+   ⚠️ Le champ `dailySchedule` dans le tool `emit_protocol` est CRITIQUE.
+   Tu DOIS placer l'ID de CHAQUE supplément recommandé dans AU MOINS UN créneau horaire.
+   
+   Les clés disponibles sont : "morning", "midday", "preWorkout", "postWorkout", "evening", "bedtime".
+   
+   Les valeurs sont des TABLEAUX d'IDs (les mêmes IDs kebab-case que dans le champ `supplements[].id`).
+   
+   RÈGLES :
+   - CHAQUE supplément du protocole DOIT apparaître dans au moins un créneau
+   - Un supplément pris "matin à jeun" ou "matin avec repas" → va dans "morning"
+   - Utilise le champ `timing` de chaque supplément pour savoir dans quel créneau le placer
+   - Si aucun supplément n'est pré/post-workout, mets des tableaux vides [] pour ces créneaux
+   - NE LAISSE PAS tous les créneaux vides — c'est un bug si ça arrive
+   
+   Exemple correct :
+   ```json
+   "dailySchedule": {
+     "morning": ["vitamine-d3-k2", "omega-3-epa-dha", "vitamine-c"],
+     "midday": ["zinc-bisglycinate", "vitamine-c"],
+     "preWorkout": ["creatine-monohydrate", "beta-alanine"],
+     "postWorkout": ["whey-isolate"],
+     "evening": ["ashwagandha-ksm66"],
+     "bedtime": ["magnesium-bisglycinate", "melatonine"]
+   }
+   ```
 
    🌙 SOIR / COUCHER
    [liste des compléments du soir]
