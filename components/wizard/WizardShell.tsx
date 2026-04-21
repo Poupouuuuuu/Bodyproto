@@ -45,7 +45,7 @@ export function WizardShell() {
         consultationDate: new Date().toISOString().slice(0, 10),
         consentGiven: false,
       },
-      basics: { age: 30, sex: "male", weightKg: 70, heightCm: 175, country: "France" },
+      basics: { age: 30, sex: "male", weightKg: 70, heightCm: 175 },
       goals: { priorities: [] },
       lifestyle: {
         activityLevel: "moderate",
@@ -56,8 +56,8 @@ export function WizardShell() {
         sunExposureMinutes: 15,
       },
       nutrition: { diet: "omnivore", frequentFoods: [], alcoholPerWeek: 0, caffeinePerDay: 1 },
-      health: { conditions: "", medications: "", bloodwork: "", allergies: "", pregnancy: false },
-      supplements: { current: "", pastBadExperiences: "", budgetTier: "30-60" },
+      health: { conditions: "", medications: "", allergies: "", pregnancy: false },
+      supplements: { current: "" },
     },
   });
 

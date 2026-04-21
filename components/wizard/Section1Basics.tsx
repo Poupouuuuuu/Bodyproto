@@ -50,10 +50,6 @@ export function Section1Basics() {
             {...register("basics.heightCm", { valueAsNumber: true })}
           />
         </div>
-        <div className="sm:col-span-2">
-          <Label>Pays / continent</Label>
-          <Input {...register("basics.country")} />
-        </div>
       </div>
     </div>
   );
