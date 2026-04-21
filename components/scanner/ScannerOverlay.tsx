@@ -7,13 +7,17 @@ import type { Particle } from "./ScanParticles";
 const STATUS_MESSAGES = [
   "Analyse du profil…",
   "Identification des carences…",
+  "Calcul des dosages personnalisés…",
+  "Comparaison des formes moléculaires…",
   "Calibration du protocole…",
+  "Génération des recommandations…",
+  "Organisation du planning journée…",
   "Finalisation…",
 ];
 
 const SCAN_PERIOD_MS = 2400;
 const ORGAN_ORDER: OrganId[] = ["brain", "shoulders", "thyroid", "heart", "liver", "gut", "knees"];
-const ESTIMATED_SECONDS = 12;
+const ESTIMATED_SECONDS = 55;
 
 type State = {
   scannedOrgans: OrganId[];
@@ -47,9 +51,9 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-/** Fake progress: fast start, slow middle, crawl near end. Never reaches 100%. */
+/** Progress curve calibrated for ~55s generation. Reaches 95% around 50s. */
 function fakeProgress(elapsedSec: number): number {
-  return Math.min(0.95, 1 - Math.exp(-elapsedSec / 8));
+  return Math.min(0.95, 1 - Math.exp(-elapsedSec / 18));
 }
 
 export function ScannerOverlay({ open }: { open: boolean }) {
@@ -89,7 +93,7 @@ export function ScannerOverlay({ open }: { open: boolean }) {
   // Status text cycle (2s interval)
   useEffect(() => {
     if (!open) return;
-    const id = setInterval(() => dispatch({ type: "statusNext" }), 2500);
+    const id = setInterval(() => dispatch({ type: "statusNext" }), 6000);
     return () => clearInterval(id);
   }, [open]);
 
