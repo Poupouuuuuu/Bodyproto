@@ -1,17 +1,20 @@
 import type { ClientProfile } from "@/lib/schemas/clientProfile";
 
 const GOAL_LABEL: Record<string, string> = {
-  performance: "Performance",
+  muscle_gain: "Prise de masse",
   weight_loss: "Perte de poids",
+  maintenance: "Maintien",
   energy: "Énergie",
   sleep: "Sommeil",
   stress: "Stress",
+  immunity: "Immunité",
+  beauty: "Beauté",
+  // Legacy values (existing consultations)
+  performance: "Performance",
   cognition: "Cognition",
   longevity: "Longévité",
   hormonal: "Hormonal",
-  immunity: "Immunité",
   digestive: "Digestion",
-  beauty: "Beauté",
   other: "Autre",
 };
 

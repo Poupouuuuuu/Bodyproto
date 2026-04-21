@@ -1,15 +1,14 @@
 import { z } from "zod";
 
 export const goalEnum = z.enum([
-  "performance", "weight_loss", "energy", "sleep", "stress",
-  "cognition", "longevity", "hormonal", "immunity", "digestive", "beauty", "other",
+  "muscle_gain", "weight_loss", "maintenance", "energy", "sleep",
+  "stress", "immunity", "beauty",
 ]);
 
 export const activityLevelEnum = z.enum(["sedentary", "light", "moderate", "very_active", "athlete"]);
-export const sportTypeEnum = z.enum(["strength", "endurance", "hiit", "team", "yoga", "none"]);
+export const sportTypeEnum = z.enum(["strength", "endurance", "hiit", "cross_training", "powerlifting", "team", "yoga"]);
 export const dietEnum = z.enum(["omnivore", "flexitarian", "vegetarian", "vegan", "carnivore_keto", "gluten_free", "lactose_free"]);
 export const frequentFoodEnum = z.enum(["fatty_fish", "eggs", "dairy", "legumes", "nuts_seeds", "leafy_greens"]);
-export const budgetTierEnum = z.enum(["<30", "30-60", "60-100", "100+"]);
 export const sexEnum = z.enum(["male", "female"]);
 
 export const clientProfileSchema = z.object({
@@ -26,7 +25,6 @@ export const clientProfileSchema = z.object({
     sex: sexEnum,
     weightKg: z.number().positive().max(300),
     heightCm: z.number().positive().max(250),
-    country: z.string().min(1),
   }),
   goals: z.object({
     priorities: z.array(goalEnum).min(1).max(3),
@@ -48,14 +46,11 @@ export const clientProfileSchema = z.object({
   health: z.object({
     conditions: z.string(),
     medications: z.string(),
-    bloodwork: z.string(),
     allergies: z.string(),
     pregnancy: z.boolean(),
   }),
   supplements: z.object({
     current: z.string(),
-    pastBadExperiences: z.string(),
-    budgetTier: budgetTierEnum,
   }),
 });
 

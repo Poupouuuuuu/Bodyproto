@@ -6,18 +6,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 type Goal = ClientProfile["goals"]["priorities"][number];
 
 const GOALS: { value: Goal; label: string }[] = [
-  { value: "performance", label: "Performance sportive / masse musculaire" },
-  { value: "weight_loss", label: "Perte de poids / recomposition" },
+  { value: "muscle_gain", label: "Prise de masse / force" },
+  { value: "weight_loss", label: "Perte de poids / sèche" },
+  { value: "maintenance", label: "Maintien / santé générale" },
   { value: "energy", label: "Énergie / anti-fatigue" },
   { value: "sleep", label: "Sommeil et récupération" },
-  { value: "stress", label: "Stress / anxiété" },
-  { value: "cognition", label: "Cognition / concentration" },
-  { value: "longevity", label: "Longévité / santé préventive" },
-  { value: "hormonal", label: "Santé hormonale / libido" },
-  { value: "immunity", label: "Immunité" },
-  { value: "digestive", label: "Santé digestive" },
+  { value: "stress", label: "Gestion du stress" },
+  { value: "immunity", label: "Immunité / résistance" },
   { value: "beauty", label: "Beauté (peau, cheveux, ongles)" },
-  { value: "other", label: "Autre" },
 ];
 
 export function Section2Goals() {
@@ -34,17 +30,17 @@ export function Section2Goals() {
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold">Objectifs prioritaires</h2>
-      <p className="text-sm text-slate-600">Choisis jusqu&apos;à 3 objectifs.</p>
+      <p className="text-sm text-bs-muted">Choisis jusqu&apos;à 3 objectifs.</p>
       <div className="grid gap-2 sm:grid-cols-2">
         {GOALS.map((g) => {
           const checked = selected.includes(g.value);
           return (
             <label
               key={g.value}
-              className={`flex items-center gap-2 rounded-md border p-3 ${checked ? "border-emerald-600 bg-emerald-50" : ""}`}
+              className={`flex items-center gap-3 rounded-2xl border p-4 transition-colors ${checked ? "border-bs-primary bg-bs-primary/5" : "border-bs-primary/10"}`}
             >
               <Checkbox checked={checked} onCheckedChange={() => toggle(g.value)} />
-              <span className="text-sm">{g.label}</span>
+              <span className="text-sm font-medium">{g.label}</span>
             </label>
           );
         })}

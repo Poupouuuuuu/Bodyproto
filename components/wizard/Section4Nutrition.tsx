@@ -14,6 +14,16 @@ import {
 
 type Food = ClientProfile["nutrition"]["frequentFoods"][number];
 
+const DIETS: { value: string; label: string; desc: string }[] = [
+  { value: "omnivore", label: "Omnivore", desc: "Tu manges de tout" },
+  { value: "flexitarian", label: "Flexitarien", desc: "Majoritairement végétal, un peu de viande" },
+  { value: "vegetarian", label: "Végétarien", desc: "Pas de viande ni poisson" },
+  { value: "vegan", label: "Vegan", desc: "Aucun produit animal" },
+  { value: "carnivore_keto", label: "Carnivore / Keto / Paleo", desc: "Très peu de glucides, riche en protéines" },
+  { value: "gluten_free", label: "Sans gluten", desc: "Intolérance ou choix" },
+  { value: "lactose_free", label: "Sans lactose", desc: "Intolérance aux produits laitiers" },
+];
+
 const FOODS: { v: Food; l: string }[] = [
   { v: "fatty_fish", l: "Poisson gras (saumon, sardines...)" },
   { v: "eggs", l: "Œufs" },
@@ -32,6 +42,9 @@ export function Section4Nutrition() {
     else set.add(value);
     setValue("nutrition.frequentFoods", Array.from(set), { shouldValidate: true });
   }
+
+  const currentDiet = DIETS.find((d) => d.value === v.diet);
+
   return (
     <div className="space-y-5">
       <h2 className="text-xl font-semibold">Alimentation</h2>
@@ -46,16 +59,17 @@ export function Section4Nutrition() {
           }
         >
           <SelectTrigger className="mt-1">
-            <SelectValue />
+            <SelectValue placeholder="Sélectionner...">
+              {currentDiet ? `${currentDiet.label} — ${currentDiet.desc}` : v.diet}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="omnivore">Omnivore</SelectItem>
-            <SelectItem value="flexitarian">Flexitarien</SelectItem>
-            <SelectItem value="vegetarian">Végétarien</SelectItem>
-            <SelectItem value="vegan">Vegan</SelectItem>
-            <SelectItem value="carnivore_keto">Carnivore / Keto / Paleo</SelectItem>
-            <SelectItem value="gluten_free">Sans gluten</SelectItem>
-            <SelectItem value="lactose_free">Sans lactose</SelectItem>
+            {DIETS.map((d) => (
+              <SelectItem key={d.value} value={d.value}>
+                <span className="font-medium">{d.label}</span>
+                <span className="ml-2 text-xs text-bs-muted">{d.desc}</span>
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
@@ -67,7 +81,7 @@ export function Section4Nutrition() {
             return (
               <label
                 key={f.v}
-                className={`flex items-center gap-2 rounded-md border p-2 ${checked ? "border-emerald-600 bg-emerald-50" : ""}`}
+                className={`flex items-center gap-2 rounded-2xl border p-3 transition-colors ${checked ? "border-bs-primary bg-bs-primary/5" : "border-bs-primary/10"}`}
               >
                 <Checkbox checked={checked} onCheckedChange={() => toggleFood(f.v)} />
                 <span className="text-sm">{f.l}</span>

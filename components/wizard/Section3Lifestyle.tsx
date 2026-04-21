@@ -16,13 +16,22 @@ import { Checkbox } from "@/components/ui/checkbox";
 type SportType = ClientProfile["lifestyle"]["sportTypes"][number];
 
 const SPORTS: { v: SportType; l: string }[] = [
-  { v: "strength", l: "Force" },
-  { v: "endurance", l: "Endurance" },
+  { v: "strength", l: "Force / Musculation" },
+  { v: "endurance", l: "Endurance / Cardio" },
   { v: "hiit", l: "HIIT" },
-  { v: "team", l: "Sports co" },
-  { v: "yoga", l: "Yoga / mobilité" },
-  { v: "none", l: "Aucun" },
+  { v: "cross_training", l: "Cross Training" },
+  { v: "powerlifting", l: "SBD / Powerlifting" },
+  { v: "team", l: "Sport co" },
+  { v: "yoga", l: "Yoga / Mobilité" },
 ];
+
+const ACTIVITY_LABELS: Record<string, string> = {
+  sedentary: "Sédentaire (bureau, peu de mouvement)",
+  light: "Légèrement actif (1-2 séances/sem)",
+  moderate: "Modérément actif (3-4 séances/sem)",
+  very_active: "Très actif (5+ séances/sem)",
+  athlete: "Athlète / compétition",
+};
 
 export function Section3Lifestyle() {
   const { register, setValue, watch } = useFormContext<ClientProfile>();
@@ -49,14 +58,14 @@ export function Section3Lifestyle() {
           }
         >
           <SelectTrigger className="mt-1">
-            <SelectValue />
+            <SelectValue placeholder="Sélectionner...">
+              {ACTIVITY_LABELS[v.activityLevel] ?? v.activityLevel}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="sedentary">Sédentaire</SelectItem>
-            <SelectItem value="light">Légèrement actif (1-2/sem)</SelectItem>
-            <SelectItem value="moderate">Modérément actif (3-4/sem)</SelectItem>
-            <SelectItem value="very_active">Très actif (5+/sem)</SelectItem>
-            <SelectItem value="athlete">Athlète / compétition</SelectItem>
+            {Object.entries(ACTIVITY_LABELS).map(([value, label]) => (
+              <SelectItem key={value} value={value}>{label}</SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
@@ -68,7 +77,7 @@ export function Section3Lifestyle() {
             return (
               <label
                 key={s.v}
-                className={`flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${checked ? "border-emerald-600 bg-emerald-50" : ""}`}
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${checked ? "border-bs-primary bg-bs-primary/5" : "border-bs-primary/10"}`}
               >
                 <Checkbox checked={checked} onCheckedChange={() => toggleSport(s.v)} />
                 {s.l}
